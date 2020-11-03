@@ -1,0 +1,70 @@
+﻿@page "/inputwatchervalidation"
+
+@using Microsoft.AspNetCore.Components.Forms
+@using ValidationForm.Models
+
+<h1>Form validation</h1>
+
+<EditForm Model="@MyEmployee" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+    <DataAnnotationsValidator />
+
+    <FormInputWatcher @ref="@InputWatcher" FieldChanged="@FieldChanged" />
+
+    <div class="row content">
+        <div class="col-4">
+            <label>Firstname:</label>
+        </div>
+        <div class="col-8">
+            @*<MyInputText Value="@MyEmployee.FirstName" />*@
+            <InputText @bind-Value="@MyEmployee.FirstName" />
+            <ValidationMessage For="@(() => MyEmployee.FirstName)" />
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-4">
+            <label>Lastname:</label>
+        </div>
+        <div class="col-8">
+            <InputText @bind-Value="@MyEmployee.LastName" />
+            <ValidationMessage For="@(() => MyEmployee.LastName)" />
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-4">
+            <label>Nickname:</label>
+        </div>
+        <div class="col-8">
+            <InputText @bind-Value="@MyEmployee.NickName" />
+            <ValidationMessage For="@(() => MyEmployee.NickName)" />
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-4">
+            <label>Year of birth:</label>
+        </div>
+        <div class="col-8">
+            <InputNumber @bind-Value="@MyEmployee.YearOfBirth" />
+            <ValidationMessage For="@(() => MyEmployee.YearOfBirth)" />
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-4">
+            <label>Email:</label>
+        </div>
+        <div class="col-8">
+            <InputText @bind-Value="@MyEmployee.Email" />
+            <ValidationMessage For="@(() => MyEmployee.Email)" />
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col-4">
+            <label>Balance:</label>
+        </div>
+        <div class="col-8">
+            <InputNumber @bind-Value="@MyEmployee.Balance" />
+            <ValidationMessage For="@(() => MyEmployee.Balance)" />
+        </div>
+    </div>
+
+    <button type="submit" disabled="@_isFormInvalid">Send</button>
+</EditForm>
